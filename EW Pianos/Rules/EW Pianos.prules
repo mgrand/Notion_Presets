@@ -1,0 +1,117 @@
+<rule-set version="1">
+	<rules>
+		<dynamic-map id="VELO">
+			<dynamic dynamic="pppp" value="0"/>
+			<dynamic dynamic="ppp" value="30"/>
+			<dynamic dynamic="pp" value="40"/>
+			<dynamic dynamic="p" value="60"/>
+			<dynamic dynamic="mp" value="80"/>
+			<dynamic dynamic="mf" value="90"/>
+			<dynamic dynamic="f" value="100"/>
+			<dynamic dynamic="ff" value="110"/>
+			<dynamic dynamic="fff" value="120"/>
+			<dynamic dynamic="ffff" value="127"/>
+		</dynamic-map>
+		<dynamic-map id="HAIR">
+			<dynamic dynamic="pppp" value="0"/>
+			<dynamic dynamic="ppp" value="30"/>
+			<dynamic dynamic="pp" value="40"/>
+			<dynamic dynamic="p" value="60"/>
+			<dynamic dynamic="mp" value="80"/>
+			<dynamic dynamic="mf" value="90"/>
+			<dynamic dynamic="f" value="100"/>
+			<dynamic dynamic="ff" value="110"/>
+			<dynamic dynamic="fff" value="120"/>
+			<dynamic dynamic="ffff" value="127"/>
+		</dynamic-map>
+		<setup>
+			<velocity-map id="VELO"/>
+			<hairpin-map id="HAIR"/>
+			<hairpin-cc value="11"/>
+		</setup>
+		<rule remark="Una Corda" enabled="true">
+			<if user-technique="1"/>
+			<set-flag name="UNAC"/>
+		</rule>
+		<rule remark="Tutte le Corde" enabled="true">
+			<if user-technique="2"/>
+			<cc controller="67" value="0" type="note-on-prefix"/>
+			<unset-flag name="UNAC"/>
+		</rule>
+		<rule remark="UNAC is set" enabled="true">
+			<if flag="UNAC"/>
+			<cc controller="67" value="127" type="note-on-prefix"/>
+		</rule>
+		<rule remark="UNAC not set" enabled="true">
+			<if not-flag="UNAC"/>
+			<cc controller="67" value="0" type="note-on-prefix"/>
+		</rule>
+		<rule remark="Sustain Pedal is Up" enabled="true">
+			<if not-condition="with-sustain-pedal"/>
+			<cc controller="64" value="0" type="note-on-prefix"/>
+		</rule>
+		<rule remark="Sustain Pedal Down" enabled="true">
+			<if condition="with-sustain-pedal"/>
+			<cc controller="64" value="127" type="note-on-prefix"/>
+		</rule>
+		<rule remark="Accent" enabled="true">
+			<if articulation="accent"/>
+			<velocity-change bump="15"/>
+		</rule>
+		<rule remark="Strong Accent" enabled="true">
+			<if articulation="strong-accent"/>
+			<velocity-change bump="30"/>
+		</rule>
+		<rule remark="Stacatto" enabled="true">
+			<if articulation="staccato"/>
+			<cc controller="1" value="127" type="note-on-prefix"/>
+			<set-flag name="STAC"/>
+		</rule>
+		<rule remark="Stacatto Accent" enabled="true">
+			<if articulation="staccato-accent"/>
+			<cc controller="1" value="127" type="note-on-prefix"/>
+			<set-flag name="STAC"/>
+			<velocity-change bump="15"/>
+		</rule>
+		<rule remark="Stacatto Strong Accent" enabled="true">
+			<if articulation="staccato-strong-accent"/>
+			<cc controller="1" value="127" type="note-on-prefix"/>
+			<set-flag name="STAC"/>
+			<velocity-change bump="30"/>
+		</rule>
+		<rule remark="Stacatissimo" enabled="true">
+			<if articulation="staccatissimo"/>
+			<cc controller="1" value="127" type="note-on-prefix"/>
+			<set-flag name="STAC"/>
+		</rule>
+		<rule remark="Stacatissimo Accent" enabled="true">
+			<if articulation="staccatissimo-accent"/>
+			<cc controller="1" value="127" type="note-on-prefix"/>
+			<set-flag name="STAC"/>
+			<velocity-change bump="15"/>
+		</rule>
+		<rule remark="Is Stacatto Strong Accent" enabled="true">
+			<if articulation="staccatissimo-strong-accent"/>
+			<cc controller="1" value="127" type="note-on-prefix"/>
+			<set-flag name="STAC"/>
+			<velocity-change bump="30"/>
+		</rule>
+		<rule remark="Not Stacatto Flag" enabled="true">
+			<if not-flag="STAC"/>
+			<cc controller="1" value="0" type="note-on-prefix"/>
+		</rule>
+		<rule remark="Marcatto / Dash" enabled="true">
+			<if articulation="dash"/>
+			<duration-change amount="0.7"/>
+		</rule>
+		<rule remark="Legato Accent" enabled="true">
+			<if articulation="legato-accent"/>
+			<velocity-change bump="15"/>
+		</rule>
+		<rule remark="Legato Strong Accent " enabled="true">
+			<if articulation="legato-strong-accent"/>
+			<velocity-change bump="30"/>
+		</rule>
+	</rules>
+</rule-set>
+

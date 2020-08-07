@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preset>
+
+  <identifier>com.markgrand.notion.eastwest.pianos.v1</identifier>
+  <name lang="en-US">EW Pianos</name>
+    <user-techniques>
+      <technique number="1">una corda</technique>
+      <technique number="2">tutte le corde</technique>
+    </user-techniques>
+</preset>
+
+
